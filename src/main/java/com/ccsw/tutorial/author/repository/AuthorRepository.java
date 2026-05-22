@@ -10,5 +10,12 @@ import org.springframework.data.repository.CrudRepository;
  *
  */
 public interface AuthorRepository extends CrudRepository<Author, Long> {
+    /**
+     * Método para recuperar un listado paginado de {@link Author}
+     *
+     * @param pageable pageable
+     * @return {@link Page} de {@link Author}
+     */
+    Page<Author> findAll(Pageable pageable); // Este método lo añadimos a mano porque CrudRepo no lo tiene, cosa que no pasaría en JPA, creo.
 
 }
