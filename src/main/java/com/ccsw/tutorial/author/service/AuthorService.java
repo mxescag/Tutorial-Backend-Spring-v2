@@ -12,6 +12,15 @@ import java.util.List;
  *
  */
 public interface AuthorService {
+    
+    /* Este método get lo hacemos porque necesitaremos saber el ID de Author en GameServiceImpl */
+    /**
+     * Recupera un {@link Author} a través de su ID
+     *
+     * @param id PK de la entidad
+     * @return {@link Author}
+     */
+    Author get(Long id);
 
     /**
      * Método para recuperar un listado paginado de {@link Author}

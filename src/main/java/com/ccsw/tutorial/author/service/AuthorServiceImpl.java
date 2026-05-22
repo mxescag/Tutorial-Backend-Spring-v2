@@ -31,6 +31,16 @@ public class AuthorServiceImpl implements AuthorService {
         return this.authorRepository.findAll(dto.getPageable().getPageable());
     }
 
+    /* Este método se usará para saber el ID de Author en GameServiceImpl */
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Author get(Long id) {
+
+        return this.authorRepository.findById(id).orElse(null);
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -42,7 +52,7 @@ public class AuthorServiceImpl implements AuthorService {
         if (id == null) {
             author = new Author();
         } else {
-            author = this.authorRepository.findById(id).orElse(null);
+            author = this.get(id);
         }
 
         assert author != null;
@@ -60,7 +70,7 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public void delete(Long id) throws Exception {
 
-        if(this.authorRepository.findById(id).orElse(null) == null){
+        if(this.get(id) == null){
             throw new Exception("Not exists");
         }
 
