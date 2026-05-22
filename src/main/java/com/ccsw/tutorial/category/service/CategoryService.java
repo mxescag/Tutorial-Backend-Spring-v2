@@ -7,6 +7,15 @@ import com.ccsw.tutorial.category.model.CategoryDto;
 
 public interface CategoryService {
 
+    /* Este método es para saber la ID de Category en GameServiceImpl */
+    /**
+     * Recupera una {@link Category} a partir de su ID
+     *
+     * @param id PK de la entidad
+     * @return {@link Category}
+     */
+    Category get(Long id);
+
     /**
      * Método para recuperar todas las categorías
      * @return {@link List} de {@link CategoryDto}

@@ -23,6 +23,18 @@ public class CategoryServiceImpl implements CategoryService{
         return (List<Category>) this.categoryRepository.findAll();
     }
 
+
+    /* Este método se utilizará en GameServiceImpl para saber la ID de Category */
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Category get(Long id) {
+
+        return this.categoryRepository.findById(id).orElse(null);
+    }
+
+
     /**
      * {@inheritDoc}
      */
@@ -34,7 +46,7 @@ public class CategoryServiceImpl implements CategoryService{
             category = new Category(); // Crea un objeto Category nuevo
         } else {
             // Si el ID ya existe
-            category = this.categoryRepository.findById(id).orElse(null); // Actualizamos
+            category = this.get(id); // Actualizamos
         }
 
         assert category != null; // Nos aseguramos que category no está vacío
@@ -48,7 +60,7 @@ public class CategoryServiceImpl implements CategoryService{
      */
     @Override
     public void delete(Long id) throws Exception {
-        if(this.categoryRepository.findById(id).orElse(null) == null) {
+        if(this.get(id) == null) {
             throw new Exception("Not exists");
         }
 
