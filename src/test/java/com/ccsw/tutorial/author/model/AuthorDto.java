@@ -1,0 +1,63 @@
+package com.ccsw.tutorial.author.model;
+
+/**
+ * @author Max Escriva
+ */
+public class AuthorDto {
+
+    // Atributos
+
+    private Long id;
+    private String name;
+    private String nationality;
+
+    // Getters y setters
+
+    /**
+     *
+     * @return id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     *
+     * @param id new value of {@link #getId()}
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     *
+     * @return name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     *
+     * @param name new value of {@link #getName()}
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     *
+     * @return nationality
+     */
+    public String getNationality() {
+        return nationality;
+    }
+
+    /**
+     *
+     * @param nationality new value of {@link #getNationality()}
+     */
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+}

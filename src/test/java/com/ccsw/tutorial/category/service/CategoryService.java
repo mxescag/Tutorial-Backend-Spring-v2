@@ -1,0 +1,33 @@
+package com.ccsw.tutorial.category.service;
+
+import java.util.List;
+
+import com.ccsw.tutorial.category.model.Category;
+import com.ccsw.tutorial.category.model.CategoryDto;
+
+public interface CategoryService {
+
+    /**
+     * Método para recuperar todas las categorías
+     * @return {@link List} de {@link CategoryDto}
+     */
+
+    List<Category> findAll();
+
+    /**
+     * Método para crear o actualizar una categoría
+     *
+     * @param id PK de la entidad
+     * @param dto datos de la entidad
+     */
+
+    void save(Long id, CategoryDto dto);
+
+    /**
+     * Método para borrar una categoría
+     *
+     * @param id PK de la entidad
+     */
+
+    void delete(Long id) throws Exception;
+}
