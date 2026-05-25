@@ -12,7 +12,16 @@ import java.util.List;
  *
  */
 public interface AuthorService {
-    
+
+    /* Implementar un listado normal de Author. El que tenemos abajo es el paginado. */
+
+    /**
+     * Recupera un listado de autores {@link Author}
+     *
+     * @return {@link List} de {@link Author}
+     */
+    List<Author> findAll();
+
     /* Este método get lo hacemos porque necesitaremos saber el ID de Author en GameServiceImpl */
     /**
      * Recupera un {@link Author} a través de su ID

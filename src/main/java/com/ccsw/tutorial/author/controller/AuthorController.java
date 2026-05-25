@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Tag(name = "Author", description = "API of Author")
@@ -27,6 +28,22 @@ public class AuthorController {
     AuthorService authorService;
     @Autowired
     ModelMapper mapper;
+
+    /* Implementar un listado normal de Author. El que tenemos abajo es el paginado. */
+    /**
+     * Recupera un listado de autores {@link Author}
+     *
+     * @return {@link List} de {@link AuthorDto}
+     */
+    @Operation(summary = "Find", description = "Method that return a list of Authors")
+    @RequestMapping(path = "", method = RequestMethod.GET)
+    public List<AuthorDto> findAll() {
+
+        List<Author> authors = this.authorService.findAll();
+
+        return authors.stream().map(e -> mapper.map(e, AuthorDto.class)).collect(Collectors.toList());
+    }
+
 
     /**
      * Método para recuperar un listado paginado de {@link Author}
