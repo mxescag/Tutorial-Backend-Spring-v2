@@ -56,6 +56,7 @@ public class CategoryIT {
 
         /* Verifica los resultados */
         assertNotNull(response); // ¿Respuesta existe, no es null? Entonces OK
+        assertNotNull(response.getBody());
         assertEquals(3, response.getBody().size());
     }
 
