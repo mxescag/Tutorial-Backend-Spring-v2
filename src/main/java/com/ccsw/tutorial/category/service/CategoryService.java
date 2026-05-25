@@ -18,7 +18,7 @@ public interface CategoryService {
 
     /**
      * Método para recuperar todas las categorías
-     * @return {@link List} de {@link CategoryDto}
+     * @return {@link List} de {@link Category}
      */
 
     List<Category> findAll();

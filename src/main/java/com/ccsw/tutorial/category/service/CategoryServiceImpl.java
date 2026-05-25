@@ -40,7 +40,7 @@ public class CategoryServiceImpl implements CategoryService{
      */
     @Override
     public void save(Long id, CategoryDto dto) {
-        Category category = this.categoryRepository.findById(id).orElse(null);
+        Category category = this.get(id);
         if (category == null) {
             // Si el ID es nulo, creamos
             category = new Category(); // Crea un objeto Category nuevo
