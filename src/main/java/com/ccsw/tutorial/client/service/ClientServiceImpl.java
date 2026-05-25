@@ -45,6 +45,10 @@ public class ClientServiceImpl implements ClientService {
             client = null;
         }
 
+        if (id != null && client == null) {
+            throw new Exception("El cliente no existe.");
+        }
+
         if (client == null) {
             if (this.clientRepository.existsByName(dto.getName())){ // Si en la BD se encuentra el nombre, significa que ya está registrado.
                 throw new Exception("El cliente ya está registrado.");
@@ -54,6 +58,7 @@ public class ClientServiceImpl implements ClientService {
         } else {
             // Si el ID se ha encontrado
             client = this.get(id); // Actualizamos
+
         }
 
         assert client != null; // Nos aseguramos que client no está vacío
