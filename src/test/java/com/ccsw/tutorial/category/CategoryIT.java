@@ -72,6 +72,7 @@ public class CategoryIT {
 
         ResponseEntity<List<CategoryDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
         assertNotNull(response);
+        assertNotNull(response.getBody());
         assertEquals(4, response.getBody().size());
 
         CategoryDto categorySearch = response.getBody().stream().filter(item -> item.getId().equals(NEW_CATEGORY_ID)).findFirst().orElse(null);
@@ -91,6 +92,7 @@ public class CategoryIT {
 
         ResponseEntity<List<CategoryDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
         assertNotNull(response);
+        assertNotNull(response.getBody());
         assertEquals(3, response.getBody().size());
 
         CategoryDto categorySearch = response.getBody().stream().filter(item -> item.getId().equals(MODIFY_CATEGORY_ID)).findFirst().orElse(null);
@@ -118,6 +120,7 @@ public class CategoryIT {
 
         ResponseEntity<List<CategoryDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
         assertNotNull(response);
+        assertNotNull(response.getBody());
         assertEquals(2, response.getBody().size());
     }
 
