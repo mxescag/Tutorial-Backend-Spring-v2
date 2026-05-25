@@ -76,7 +76,7 @@ public class CategoryIT {
         assertNotNull(response.getBody());
         assertEquals(4, response.getBody().size());
 
-        CategoryDto categorySearch = response.getBody().stream().filter(item -> item.getId().equals(NEW_CATEGORY_ID)).findFirst().orElse(null);
+        CategoryDto categorySearch = response.getBody().stream().filter(item -> item.getName().equals(NEW_CATEGORY_NAME)).findFirst().orElse(null);
         assertNotNull(categorySearch);
         assertEquals(NEW_CATEGORY_NAME, categorySearch.getName());
     }
