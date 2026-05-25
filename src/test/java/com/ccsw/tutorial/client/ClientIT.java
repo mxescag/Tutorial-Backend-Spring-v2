@@ -1,7 +1,5 @@
 package com.ccsw.tutorial.client;
 
-
-import com.ccsw.tutorial.category.model.CategoryDto;
 import com.ccsw.tutorial.client.model.ClientDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +37,8 @@ public class ClientIT {
     private TestRestTemplate restTemplate;
 
     /* Esto se declara fuera del test, a nivel de clase para indicar a Jackson que el JSON debe convertirse a List<ClientDto> */
-    ParameterizedTypeReference<List<ClientDto>> responseType = new ParameterizedTypeReference<List<ClientDto>>(){};
+    ParameterizedTypeReference<List<ClientDto>> responseType = new ParameterizedTypeReference<>() {
+    };
 
     @Test
     public void findAllShouldReturnAllClients(){
