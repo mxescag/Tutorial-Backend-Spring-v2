@@ -2,12 +2,15 @@ package com.ccsw.tutorial.game.service;
 
 import com.ccsw.tutorial.author.service.AuthorService;
 import com.ccsw.tutorial.category.service.CategoryService;
+import com.ccsw.tutorial.common.criteria.SearchCriteria;
+import com.ccsw.tutorial.game.GameSpecification;
 import com.ccsw.tutorial.game.model.Game;
 import com.ccsw.tutorial.game.model.GameDto;
 import com.ccsw.tutorial.game.repository.GameRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 
@@ -36,7 +39,16 @@ public class GameServiceImpl implements GameService {
     @Override
     public List<Game> find(String title, Long idCategory) {
 
-        return (List<Game>) this.gameRepository.findAll();
+        GameSpecification titleSpec = new GameSpecification(new SearchCriteria("title", ":", title));
+        GameSpecification categorySpec = new GameSpecification(new SearchCriteria("category.id", ":", idCategory));
+
+        /* Esto crea una consulta SQL juntando las dos de arriba, algo así como:
+        * "SELECT * from game
+        * WHERE title LIKE %title(var)%
+        * AND category.id = idCategory(var) */
+        Specification<Game> specification = titleSpec.and(categorySpec);
+
+        return this.gameRepository.findAll(specification); // Devolverá los resultados filtrados por las condiciones de arriba.
     }
 
     /**
