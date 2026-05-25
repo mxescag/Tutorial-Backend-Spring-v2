@@ -53,7 +53,7 @@ public class ClientController {
      * @throws Exception Lanzará esto si el nombre del cliente ya está guardado anteriormente
      */
     @Operation(summary = "Save or Update", description = "Method that saves or updates a Client")
-    @RequestMapping(path = {"", "/{id"}, method = RequestMethod.PUT)
+    @RequestMapping(path = {"", "/{id}"}, method = RequestMethod.PUT)
     public void save(@PathVariable(name = "id", required = false) Long id,
                      @RequestBody ClientDto dto) throws Exception {
         this.clientService.save(id, dto);

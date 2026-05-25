@@ -38,10 +38,15 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public void save(Long id, ClientDto dto) throws Exception {
 
-        Client client = this.get(id);
+        Client client;
+        if (id != null) {
+            client = this.get(id);
+        } else {
+            client = null;
+        }
 
         if (client == null) {
-            if (this.clientRepository.findByName(dto.getName())){ // Si en la BD se encuentra el nombre, significa que ya está registrado.
+            if (this.clientRepository.existsByName(dto.getName())){ // Si en la BD se encuentra el nombre, significa que ya está registrado.
                 throw new Exception("El cliente ya está registrado.");
             }
             // Si el cliente no existe antes (el ID es nulo)
