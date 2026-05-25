@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
@@ -41,6 +42,7 @@ public class ClientIT {
 
     @Test
     public void findAllShouldReturnAllClients(){
+
         ResponseEntity<List<ClientDto>> response = restTemplate.exchange(
                 LOCALHOST + port + SERVICE_PATH, // URL
                 HttpMethod.GET, // método HTTP que usamos
@@ -52,5 +54,32 @@ public class ClientIT {
         assertNotNull(response); // ¿Existe respuesta? OK
         assertNotNull(response.getBody());
         assertEquals(4, response.getBody().size()); // ¿Devuelve el número de clientes que esperamos? OK
+    }
+
+
+    /* Constantes para el test siguiente */
+    public static final String NEW_CLIENT_NAME = "CLIENT5";
+
+    @Test
+    public void saveWithoutIdShouldCreateNewClient() {
+
+        ClientDto dto = new ClientDto();
+        dto.setName(NEW_CLIENT_NAME);
+
+        restTemplate.exchange(
+                LOCALHOST + port + SERVICE_PATH,
+                HttpMethod.PUT,
+                new HttpEntity<>(dto),
+                Void.class
+        );
+
+        ResponseEntity<List<ClientDto>> response = restTemplate.exchange(LOCALHOST + port + SERVICE_PATH, HttpMethod.GET, null, responseType);
+        assertNotNull(response);
+        assertNotNull(response.getBody());
+        assertEquals(5, response.getBody().size());
+
+        ClientDto clientSearch = response.getBody().stream().filter(item -> item.getName().equals(NEW_CLIENT_NAME)).findFirst().orElse(null);
+        assertNotNull(clientSearch);
+        assertEquals(NEW_CLIENT_NAME, clientSearch.getName());
     }
 }
