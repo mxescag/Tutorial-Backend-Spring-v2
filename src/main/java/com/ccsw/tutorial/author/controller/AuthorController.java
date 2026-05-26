@@ -36,7 +36,7 @@ public class AuthorController {
      * @return {@link List} de {@link AuthorDto}
      */
     @Operation(summary = "Find", description = "Method that return a list of Authors")
-    @RequestMapping(path = "", method = RequestMethod.GET)
+    @GetMapping(path = "")
     public List<AuthorDto> findAll() {
 
         List<Author> authors = this.authorService.findAll();
@@ -81,7 +81,7 @@ public class AuthorController {
     }
 
     /**
-     * Método para eliminar un
+     * Método para eliminar un {@link Author}
      *
      * @param id PK de la entidad
      */
