@@ -5,6 +5,7 @@ import com.ccsw.tutorial.client.model.Client;
 import com.ccsw.tutorial.game.model.Game;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -29,10 +30,10 @@ public class Loan {
     private Game game;
 
     @Column(name = "startDate", nullable = false)
-    private Date startDate;
+    private LocalDate startDate;
 
     @Column(name = "endDate",  nullable = false)
-    private Date endDate;
+    private LocalDate endDate;
 
 
     /* -- GETTERS Y SETTERS -- */
@@ -89,7 +90,7 @@ public class Loan {
      * Devuelve la fecha de inicio del préstamo.
      * @return {@link #startDate}
      */
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
@@ -97,7 +98,7 @@ public class Loan {
      * Asigna nuevo valor a la fecha de inicio del préstamo.
      * @param startDate nuevo valor de {@link #getStartDate()}
      */
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
@@ -105,7 +106,7 @@ public class Loan {
      * Devuelve la fecha de final de préstamo.
      * @return {@link #endDate}
      */
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
@@ -113,7 +114,7 @@ public class Loan {
      * Asigna un nuevo valor a la fecha de final de préstamo.
      * @param endDate nuevo valor de {@link #getEndDate()}
      */
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 }

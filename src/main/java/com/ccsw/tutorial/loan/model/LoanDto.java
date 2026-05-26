@@ -4,20 +4,20 @@ package com.ccsw.tutorial.loan.model;
 import com.ccsw.tutorial.client.model.ClientDto;
 import com.ccsw.tutorial.game.model.GameDto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
  * @author Max Escrivá
  */
 public class LoanDto {
-
     /* -- ATRIBUTOS -- */
 
     private Long id;
     private ClientDto clientDto;
     private GameDto gameDto;
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
 
 
     /* -- GETTERS Y SETTERS -- */
@@ -45,19 +45,19 @@ public class LoanDto {
         this.gameDto = gameDto;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 }
