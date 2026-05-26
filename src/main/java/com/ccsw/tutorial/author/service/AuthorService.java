@@ -48,7 +48,7 @@ public interface AuthorService {
     void save(Long id, AuthorDto dto);
 
     /**
-     * Método para crear o actualizar un {@link Author}
+     * Método para borrar un {@link Author}
      *
      * @param id PK de la entidad
      */

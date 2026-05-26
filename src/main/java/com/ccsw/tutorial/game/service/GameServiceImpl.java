@@ -55,6 +55,14 @@ public class GameServiceImpl implements GameService {
      * {@inheritDoc}
      */
     @Override
+    public Game get(Long id) {
+        return this.gameRepository.findById(id).orElse(null);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void save(Long id, GameDto dto) {
 
         Game game;
@@ -73,4 +81,13 @@ public class GameServiceImpl implements GameService {
         this.gameRepository.save(game);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void delete(Long id) throws Exception {
+        if (this.get(id) == null) throw new Exception("El juego no existe.");
+
+        this.gameRepository.deleteById(id);
+    }
 }

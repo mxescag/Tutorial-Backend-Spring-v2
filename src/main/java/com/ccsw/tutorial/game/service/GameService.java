@@ -21,11 +21,25 @@ public interface GameService {
     List<Game> find(String title, Long idCategory);
 
     /**
+     * Recupera un juego por su ID
+     * @param id PK de la entidad. ID del juego.
+     * @return {@link Game}
+     */
+    Game get(Long id);
+
+    /**
      * Guarda o modifica un juego, dependiendo de si el identificador está o no informado
      *
      * @param id PK de la entidad
      * @param dto datos de la entidad
      */
     void save(Long id, GameDto dto);
+
+    /**
+     * Elimina un juego según su ID
+     * @param id PK de la entidad. ID del juego.
+     * @throws Exception Lanzará excepción si no se ha encontrado el juego.
+     */
+    void delete(Long id) throws Exception;
 
 }
