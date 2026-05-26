@@ -24,3 +24,9 @@ INSERT INTO client(name) VALUES ('Charles Leclerc');
 INSERT INTO client(name) VALUES ('Max Verstappen');
 INSERT INTO client(name) VALUES ('Lewis Hamilton');
 INSERT INTO client(name) VALUES ('Kimi Antonelli');
+
+-- PRÉSTAMOS
+INSERT INTO loan(client_id, game_id, startDate, endDate) values ( 1, 2, 2026-01-03, 2026-01-07 );
+INSERT INTO loan(client_id, game_id, startDate, endDate) values ( 2, 3, 2026-01-03, 2026-01-13 );
+INSERT INTO loan(client_id, game_id, startDate, endDate) values ( 1, 5, 2026-01-04, 2026-01-11 );
+INSERT INTO loan(client_id, game_id, startDate, endDate) values ( 4, 4, 2026-01-03, 2026-01-07 );
