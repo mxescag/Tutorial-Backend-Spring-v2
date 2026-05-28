@@ -5,7 +5,7 @@ import com.ccsw.tutorial.client.model.ClientDto;
 import com.ccsw.tutorial.game.model.GameDto;
 
 import java.time.LocalDate;
-import java.util.Date;
+
 
 /**
  * @author Max Escrivá
@@ -14,8 +14,8 @@ public class LoanDto {
     /* -- ATRIBUTOS -- */
 
     private Long id;
-    private ClientDto clientDto;
-    private GameDto gameDto;
+    private ClientDto client; /* Recuerda que para que funcione el Mapper, deben llamarse igual en Loan y LoanDto */
+    private GameDto game;  /* Recuerda que para que funcione el Mapper, deben llamarse igual en Loan y LoanDto */
     private LocalDate startDate;
     private LocalDate endDate;
 
@@ -29,20 +29,20 @@ public class LoanDto {
         this.id = id;
     }
 
-    public ClientDto getClientDto() {
-        return clientDto;
+    public ClientDto getClient() {
+        return client;
     }
 
-    public void setClientDto(ClientDto clientDto) {
-        this.clientDto = clientDto;
+    public void setClient(ClientDto client) {
+        this.client = client;
     }
 
-    public GameDto getGameDto() {
-        return gameDto;
+    public GameDto getGame() {
+        return game;
     }
 
-    public void setGameDto(GameDto gameDto) {
-        this.gameDto = gameDto;
+    public void setGame(GameDto game) {
+        this.game = game;
     }
 
     public LocalDate getStartDate() {

@@ -21,18 +21,18 @@ public class Loan {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "game_id", nullable = false)
     private Game game;
 
-    @Column(name = "startDate", nullable = false)
+    @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 
-    @Column(name = "endDate",  nullable = false)
+    @Column(name = "end_date",  nullable = false)
     private LocalDate endDate;
 
 
