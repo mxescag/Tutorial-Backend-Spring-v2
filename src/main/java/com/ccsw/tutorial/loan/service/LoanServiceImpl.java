@@ -2,6 +2,7 @@ package com.ccsw.tutorial.loan.service;
 
 import com.ccsw.tutorial.client.service.ClientService;
 import com.ccsw.tutorial.game.service.GameService;
+import com.ccsw.tutorial.loan.LoanSpecification;
 import com.ccsw.tutorial.loan.model.Loan;
 import com.ccsw.tutorial.loan.model.LoanDto;
 import com.ccsw.tutorial.loan.model.LoanSearchDto;
@@ -9,6 +10,7 @@ import com.ccsw.tutorial.loan.repository.LoanRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.temporal.ChronoUnit;
@@ -46,7 +48,12 @@ public class LoanServiceImpl implements LoanService {
      */
     @Override
     public Page<Loan> findPage(LoanSearchDto dto) {
-        return this.loanRepository.findAll(dto.getPageable().getPageable());
+        return this.loanRepository.findAll(
+                Specification.where(LoanSpecification.hasGame(dto.getGameId()))
+                        .and(LoanSpecification.hasClient(dto.getClientId()))
+                        .and(LoanSpecification.containsDate(dto.getDate())),
+                dto.getPageable().getPageable()
+        );
     }
 
     /**
@@ -67,8 +74,17 @@ public class LoanServiceImpl implements LoanService {
         }
 
         /* Juego no puede ser prestado a otro cliente en ese rango de fechas */
+
+        long excludeId;
+
+        if (id != null) {
+            excludeId = id;
+        } else {
+            excludeId = -1L;
+        }
+
         List<Loan> gameConflicts = loanRepository.findOverlappingByGame(
-                dto.getGameDto().getId(), dto.getStartDate(), dto.getEndDate(), dto.getGameDto().getId()); // Este es para excluirlo y que no salga en la lista
+                dto.getGame().getId(), dto.getStartDate(), dto.getEndDate(), excludeId); // Excluimos el ID que estamos editando
 
         if (!gameConflicts.isEmpty()) { // Si hay algo en la lista
             throw new Exception("El juego ya está prestado en ese período.");
@@ -76,26 +92,25 @@ public class LoanServiceImpl implements LoanService {
 
         /* El cliente no puede tener más de 2 préstamos activos en ese rango. */
         List<Loan> clientLoans = loanRepository.findOverlappingByClient(
-                dto.getClientDto().getId(), dto.getStartDate(), dto.getEndDate(), dto.getClientDto().getId());
+                dto.getClient().getId(), dto.getStartDate(), dto.getEndDate(), excludeId);
 
-        if (!clientLoans.isEmpty()) {
+        if (clientLoans.size() >= 2) {
             throw new Exception("El cliente ya tiene 2 préstamos activos.");
         }
 
         /* Si nada de lo de arriba se da... */
 
-        Loan loan = null; // Creamos un objeto Loan sin inicializar.
+        Loan loan; // Creamos un objeto Loan sin inicializar.
         if (dto.getId() !=null) {
-            this.loanRepository.findById(dto.getId()).orElseThrow(); // Si el ID dado no es nulo, lo buscará en la BD
+            loan = this.loanRepository.findById(dto.getId()).orElseThrow(); // Si el ID dado no es nulo, lo buscará en la BD
         } else {
             loan = new Loan(); // Si el ID no existe antes, creamos un nuevo préstamo
         }
 
         /* Rellenamos los datos del préstamo */
 
-        assert loan != null;
-        loan.setGame(gameService.get(dto.getGameDto().getId()));
-        loan.setClient(clientService.get(dto.getClientDto().getId()));
+        loan.setGame(gameService.get(dto.getGame().getId()));
+        loan.setClient(clientService.get(dto.getClient().getId()));
         loan.setStartDate(dto.getStartDate());
         loan.setEndDate(dto.getEndDate());
 
