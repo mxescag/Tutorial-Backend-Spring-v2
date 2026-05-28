@@ -67,7 +67,6 @@ public class AuthorServiceImpl implements AuthorService {
             author = this.get(id);
         }
 
-        assert author != null;
         /* La siguiente utilidad nos permite copiar más de un dato de una clase a otra, siempre que las propiedades se llamen igual.
         * En este caso, de AuthorDto (data) a Author.
         * Aquí ignoramos el id para que no nos copie un null a la clase destino. */
