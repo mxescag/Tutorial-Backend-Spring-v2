@@ -3,6 +3,7 @@ package com.ccsw.tutorial.loan.repository;
 import com.ccsw.tutorial.loan.model.Loan;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -13,7 +14,8 @@ import java.util.List;
 /**
  * @author Max Escrivá
  */
-public interface LoanRepository extends CrudRepository<Loan, Long> {
+public interface LoanRepository extends CrudRepository<Loan, Long>, JpaSpecificationExecutor<Loan> // Sin esto, no ejecuta las specif
+{
     /**
      * Método para recuperar un listado paginado de {@link Loan}
      * @param pageable
